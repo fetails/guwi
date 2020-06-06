@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.0.1">
+    <title>r e m i c k s</title>
+
+    <!-- Bootstrap core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <!-- Favicons -->
+<meta name="theme-color" content="#563d7c">
+
+
+    <style>
+        body, html
+        {
+            height: 100%;
+            background: rgb(2,0,36);
+            background-repeat: no-repeat;
+            background-size:auto;
+            background-attachment: fixed;
+            background-position:auto;
+            background: linear-gradient(56deg, rgb(44, 112, 60) 0%, rgb(80, 49, 151) 27%, rgb(163, 53, 45) 100%);
+        }
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" href="#">remicks</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+</nav>
+<br /><br /><br /><br />
+<main role="main" class="container">
+  <div class="jumbotron">
+    <h3>idk</h3>
+    <hr />
+	<code>
+	<br />LD SP, $fffe | $0000
+	<br />XOR A | $0003
+	<br />LD HL, $9fff | $0004
+	<br />LD (HL-), A | $0007
+	<br />CB PREFIX INSERT HERE | $0008
+	<br />LD A, H | $0009
+	<br />JR NZ, | $000a
+	<br />LD HL, $ff26 | $000c
+	<br />LD C, $11 | $000f
+	<br />LD A, $80 | $0011
+	<br />LD (HL-), A | $0013
+	<br />LD ($ff00+C), A | $0014
+	<br />INC C | $0015
+	<br />LD A, $f3 | $0016
+	<br />LD ($ff00+C), A | $0018
+	<br />LD (HL-), A | $0019
+	<br />LD A, $77 | $001a
+	<br />LD A, $fc | $001d
+	<br />LD ($ff00+$47), A | $001f
+	<br />LD DE, $0104 | $0021
+	<br />LD HL, $8010 | $0024
+	<br />LD A, (DE) | $0027
+	<br />CALL $0095 | $0028
+	<br />CALL $0096 | $002b
+	<br />INC DE | $002e
+	<br />LD A, B | $002f
+	<br />CP A, $34 | $0030
+	<br />JR NZ, | $0032
+	<br />LD DE, $00d8 | $0034
+	<br />LD B, $08 | $0037
+	<br />LD A, (DE) | $0039
+	<br />INC DE | $003a
+	<br />LD (HL+), A | $003b
+	<br />INC HL | $003c
+	<br />DEC B | $003d
+	<br />JR NZ, | $003e
+	<br />LD A, $19 | $0040
+	<br />SBC A, C | $0044
+	<br />LD HL, $992f | $0045
+	<br />LD C, $0c | $0048
+	<br />JR Z, $0008 | $004b
+	<br />LD (HL-), A | $004d
+	<br />DEC C | $004e
+	<br />JR NZ, | $004f
+	<br />LD H, A | $0055
+	<br />LD A, $64 | $0056
+	<br />LD ($ff00+$42), A | $0059
+	<br />LD A, $91 | $005b
+	<br />LD ($ff00+$40), A | $005d
+	<br />LD E, $02 | $0060
+	<br />LD C, $0c | $0062
+	<br />LD A, ($ff00+$44) | $0064
+	<br />CP A, $90 | $0066
+	<br />JR NZ, | $0068
+	<br />DEC C | $006a
+	<br />JR NZ, | $006b
+	<br />JR NZ, | $006e
+	<br />LD C, $13 | $0070
+	<br />LD A, H | $0073
+	<br />LD E, $83 | $0074
+	<br />CP A, $62 | $0076
+	<br />JR Z, $0006 | $0078
+	<br />LD E, $c1 | $007a
+	<br />CP A, $64 | $007c
+	<br />JR NZ, | $007e
+	<br />LD A, B | $0080
+	<br />LD ($ff00+C), A | $0081
+	<br />INC C | $0082
+	<br />LD A, $87 | $0083
+	<br />LD ($ff00+C), A | $0085
+	<br />LD A, ($ff00+$42) | $0086
+	<br />LD ($ff00+$42), A | $0089
+	<br />JR NZ, | $008c
+	<br />DEC B | $008e
+	<br />JR NZ, | $008f
+	<br />JR NZ, | $0092
+	<br />CB PREFIX INSERT HERE | $0094
+	<br />LD B, $04 | $0096
+	<br />CB PREFIX INSERT HERE | $0099
+	<br />LD DE, $c117 | $009a
+	<br />CB PREFIX INSERT HERE | $009d
+	<br />LD DE, $0517 | $009e
+	<br />JR NZ, | $00a1
+	<br />LD (HL+), A | $00a3
+	<br />INC HL | $00a4
+	<br />LD (HL+), A | $00a5
+	<br />INC HL | $00a6
+	<br />LD H, (HL) | $00aa
+	<br />LD H, (HL) | $00ab
+	<br />CALL Z, $000d | $00ac
+	<br />NOP | $00b3
+	<br />ADD A, E | $00b3
+	<br />NOP | $00b5
+	<br />INC C | $00b5
+	<br />NOP | $00b7
+	<br />DEC C | $00b7
+	<br />NOP | $00b9
+	<br />LD ($1f11), SP | $00b9
+	<br />LD DE, $881f | $00ba
+	<br />NOP | $00bf
+	<br />LD C, $dc | $00bf
+	<br />CALL Z, $e66e | $00c1
+	<br />UNIMPLEMENTED OPCODE! | $00c4
+	<br />UNIMPLEMENTED OPCODE! | $00c5
+	<br />SBC A, C | $00c7
+	<br />CP A, E | $00c8
+	<br />CP A, E | $00c9
+	<br />LD H, A | $00ca
+	<br />LD C, $ec | $00cd
+	<br />CALL Z, $dcdd | $00cf
+	<br />SBC A, C | $00d2
+	<br />CP A, E | $00d4
+	<br />CP A, C | $00d5
+	<br />LD A, $3c | $00d7
+	<br />LD B, D | $00d9
+	<br />CP A, C | $00da
+	<br />AND A, L | $00db
+	<br />CP A, C | $00dc
+	<br />AND A, L | $00dd
+	<br />LD B, D | $00de
+	<br />LD HL, $0104 | $00e0
+	<br />LD DE, $00a8 | $00e3
+	<br />LD A, (DE) | $00e6
+	<br />INC DE | $00e7
+	<br />JR NZ, | $00e9
+	<br />INC HL | $00eb
+	<br />CP A, $34 | $00ed
+	<br />JR NZ, | $00ef
+	<br />LD B, $19 | $00f1
+	<br />ADD A, (HL) | $00f4
+	<br />INC HL | $00f5
+	<br />DEC B | $00f6
+	<br />JR NZ, | $00f7
+	<br />ADD A, (HL) | $00f9
+	<br />JR NZ, | $00fa
+	<br />LD A, $01 | $00fc
+	<br />LD ($ff00+$50), A | $00fe
+</code>
+    <!-- <a class="btn btn-lg btn-primary" href="/docs/4.5/components/navbar/" role="button">View navbar docs &raquo;</a>-->
+    </div>
+</main>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="scr/script.js"></script>
+</html>
