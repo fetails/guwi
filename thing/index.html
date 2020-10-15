@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>susi</title>
+        <meta name="author" content="guwi" />
+    </head>
+    <body>
+        <h4>thing</h4>
+        <span id="average_fps">{{loading...}}</span><br />
+        <span id="ent_size">{{loading...}}</span><br />
+        <span id="local_pos">{{loading...}}</span><br />
+        <canvas id="susi_canvas" width="800" height="600" style="border:1px solid #000;"></canvas>
+        <script src="drawings.js"></script>
+        <script src="collider.js"></script>
+        <script src="player.js"></script>
+        <script src="controller.js"></script>
+        <script src="entities.js"></script>
+        <script>
+            let getter = document.querySelector( "canvas" );
+            let g_pContext = getter.getContext( "2d" );
+            
+            let local = new c_player();
+            let controller = new c_controller();
+            let collider = new c_collider( local );
+
+            let entities = [];
+            let player_max_inst = 64;
+
+            for( var i = 0; i < player_max_inst; i++ )
+            {
+                entities[ i ] = new c_entities( i );
+                entities[ i ].set_spawn( getter.width, getter.height );
+            };
+
+            console.log( entities );
+            // 87 - W
+            // 68 - Dd
+            // 83 - S
+            // 65 - A
+            document.onkeydown = function( e ) {
+                
+                if( e.keyCode == 87 ) controller.move_up = true;
+                if( e.keyCode == 68 ) controller.move_right = true;
+                if( e.keyCode == 83 ) controller.move_down = true;
+                if( e.keyCode == 65 ) controller.move_left = true;
+                if( e.keyCode == 16 ) controller.shift = true;
+            };
+
+            document.onkeyup = function( e ) {
+                if( e.keyCode == 87 ) controller.move_up = false;
+                if( e.keyCode == 68 ) controller.move_right = false;
+                if( e.keyCode == 83 ) controller.move_down = false;
+                if( e.keyCode == 65 ) controller.move_left = false;
+                if( e.keyCode == 16 ) controller.shift = false;
+            };
+
+            local.set_spawn( getter.width, getter.height )
+            document.getElementById("ent_size").innerHTML = "player size: " + player_max_inst;
+
+            let start_time_fn = performance.now();
+            let frequency = 0;
+            let loop = function()
+            {
+
+                g_pContext.clearRect( 0, 0, getter.width, getter.height );
+                draw_filled_rect( g_pContext, 0, 0, getter.width, getter.height, "#000000" );
+                local.render_player( g_pContext );                
+                for( var i = 0; i < player_max_inst; i++ )
+                {
+                    entities[ i ].render_entity( g_pContext );
+                    collider.process_event();
+                    collider.did_collide( entities[ i ].pos_x, entities[ i ].pos_y, entities[ i ].size_x, entities[ i ].size_y );
+                };
+                controller.loop( local );
+
+                let end_time_fn = performance.now();
+                frequency = end_time_fn - start_time_fn;
+                start_time_fn = end_time_fn;
+
+                document.getElementById("average_fps").innerHTML = "average fps: " + Math.round( 1000 / frequency );
+                document.getElementById("local_pos").innerHTML = "(x: " + local.pos.x + " | y: " + local.pos.y + ")";
+            };
+            setInterval( loop, 1.0 / frequency );
+        </script>
+    </body>
+</html>
