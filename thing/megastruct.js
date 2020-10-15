@@ -2,14 +2,15 @@ class c_megastruct
 {
     constructor( canvas, context )
     {
+        this.canvas = canvas;
+        this.context = context;
+
         this.player = new c_player( );
         this.collider = new c_collider( this.player );
         this.controller = new c_controller( );
+        this.world = new c_world( this.player, this.canvas );
         this.entities = [ ];
         this.max_players = 32;
-
-        this.canvas = canvas;
-        this.context = context;
 
         this.setup_entities( );
     }

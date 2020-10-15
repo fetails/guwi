@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="idk">
+    <title>r e m i c k s</title>
+
+    <!-- Bootstrap core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+
+    <!-- Favicons -->
+<meta name="theme-color" content="#563d7c">
+    <style>
+        body, html
+        {
+            height: 100%;
+            background: rgb(2,0,36);
+            background-repeat: no-repeat;
+            background-size:auto;
+            background-attachment: fixed;
+            background-position:auto;
+            background: linear-gradient(56deg, rgb(44, 112, 60) 0%, rgb(80, 49, 151) 27%, rgb(163, 53, 45) 100%);
+        }
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" href="#">remicks</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+</nav>
+<br /><br /><br /><br />
+<main role="main" class="container">
+  <div class="jumbotron">
+    <h3>r e m i c k s</h3>
+    <h4>thing</h4>
+        <b>controllers: </b> w, a, s, d, l-shift ( for speed boi )<br />
+        <b>fps:</b> <span id="average_fps">{{loading...}}</span><br />
+        <b>max players: </b><span id="ent_size">{{loading...}}</span><br />
+        <b>local->position:</b> <span id="local_pos">{{loading...}}</span><br />
+        <b>screen to world</b>: <span id="scr2w">{{loading...}}</span><br />
+        <b>world to screen</b>: <span id="w2scr">{{loading...}}</span><br />
+		
+		<canvas id="susi_canvas" width="800" height="600" style="border:1px solid #000;"></canvas>
+		<script src="js/memes/drawings.js"></script>
+        <script src="js/memes/collider.js"></script>
+        <script src="js/memes/player.js"></script>
+        <script src="js/memes/controller.js"></script>
+        <script src="js/memes/entities.js"></script>
+        <script src="js/memes/world.js"></script>
+        <script src="js/memes/megastruct.js"></script>
+        <script src="js/memes/scene.js"></script>
+        <iframe src="https://www.youtube.com/embed/unYAWpvG6jo?rel=0&autoplay=1" height="598" width="400" allow="autoplay"></iframe>
+    
+	
+		<script>
+            let scene = new c_scene()
+            
+            scene.on_init( );
+
+            let run_game_scene = function( )
+            {
+                scene.on_loop();
+                window.requestAnimationFrame( run_game_scene );
+            };
+            
+            window.requestAnimationFrame( run_game_scene );
+
+        </script>
+	</div>
+</main>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+</html>

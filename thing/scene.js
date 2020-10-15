@@ -6,6 +6,7 @@ class c_scene
         this.context = this.canvas.getContext( "2d" );
         this.m = new c_megastruct( this.canvas, this.context );
 
+        this.dummy_mode = true;
         this.start_time_fn = 0;
         this.frequency_fn = 0;
     }
@@ -30,7 +31,14 @@ class c_scene
     on_loop( )
     {
         this.on_clear_screen( );
-        this.m.controller.loop( this.m.player );
+
+        this.m.world.on_loop();
+        if( !this.dummy_mode )
+            this.m.controller.loop( this.m.player );
+        else {
+            this.m.player.pos.x += this.m.world.dir.x;
+            this.m.player.pos.y += this.m.world.dir.y;
+        }
         this.m.on_run_player( );
 
         let end_time_fn = performance.now();
@@ -39,6 +47,8 @@ class c_scene
 
         document.getElementById("average_fps").innerHTML = "average fps: " + Math.round( 1000 / this.frequency );
         document.getElementById("local_pos").innerHTML = "(x: " + this.m.player.pos.x + " | y: " + this.m.player.pos.y + ")";
+       
+        let w2scr = this.world_to_screen( this.m.player.pos );
         document.getElementById("w2scr").innerHTML = "(x: " + this.m.player.pos.x + " | y: " + this.m.player.pos.y + ")";
 
         let scr2w = this.screen_to_world( this.m.player.pos );
@@ -51,6 +61,15 @@ class c_scene
         let destination = { x: position.x, y: position.y };
 
         let converted = { x: ( destination.x / this.canvas.width ).toFixed( 2 ), y: ( destination.y / this.canvas.height ).toFixed( 2 ) };
+
+        return converted;
+    }
+
+    world_to_screen( position )
+    {
+        let destination = this.screen_to_world( position )
+
+        let converted = { x: destination.x * this.canvas.width, y: destination.y * this.canvas.height };
 
         return converted;
     }

@@ -10,6 +10,9 @@ class c_controller
         this.shift = false;
         this.shift_speed = 15;
         this.walk_speed = 5;
+
+        this.dir_x = 0;
+        this.dir_y = 0;
     }
 
     on_event_down( e )

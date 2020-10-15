@@ -4,6 +4,7 @@ class c_player
     {
         this.velocity = 0.000;
         this.pos = { x: 0, y: 0 };
+        this.size = { x: 40, y: 40 };
     }
 
     move_to( _x, _y )
