@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>collision</title>
+    </head>
+    <body>
+        <style>
+            html, body
+            {
+                margin:0;
+                padding:0;
+                overflow:hidden;
+            }
+        </style>
+        <canvas style="border:1px solid rgb(0, 0, 0);"></canvas>
+        <script>
+            let canvas = document.querySelector( "canvas" ),
+                context = canvas.getContext( "2d" );
+
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            class c_mouse2d
+            {
+                constructor()
+                {
+                    this.pos = { x: 0, y: 0 };
+                    this.size = { x: 200, y: 200 };
+                    this.setup_mouse_coords( );
+                };
+
+                setup_mouse_coords()
+                {
+                    document.onmousemove = ((e) => {
+                        this.pos.x = e.clientX - ( this.size.x / 2 );
+                        this.pos.y = e.clientY - ( this.size.y / 2 );
+                    });
+                };
+
+                render_mouse( )
+                {
+                    context.strokeStyle = "#FFFFFF";
+                    context.strokeRect(this.pos.x, this.pos.y, this.size.x, this.size.y);
+                };
+            };
+
+            let mouse = new c_mouse2d( );
+
+            class c_rect
+            {
+                constructor( interceptor )
+                {
+                    this.size = { x: 200, y: 200 };
+                    this.pos = { x: canvas.width / 2 - ( this.size.x / 2 ), y: canvas.height / 2 - ( this.size.y / 2 ) };
+                    this.m = interceptor;
+                    this.collide_state = "None";
+                    this.state = "";
+                };
+
+                draw_rectangle( )
+                {
+                    context.fillStyle = "rgba(52, 140, 167, 255)";
+                    context.fillRect( this.pos.x, this.pos.y, this.size.x, this.size.y );
+
+                    context.font = "20px Arial";
+                    context.fillStyle = "white";
+                    context.fillText( "x", this.pos.x, this.pos.y - 2 );
+                    context.fillText( "w", this.pos.x + this.size.x - 12, this.pos.y - 2 );
+                   
+                    context.fillText( "y", this.pos.x + this.size.x + 2, this.pos.y + 12 );
+                    context.fillText( "h", this.pos.x + this.size.x + 2, this.pos.y + this.size.y - 2 );
+
+                    let a_center_x = this.m.pos.x - ( this.m.size.x / 2 );
+                    let a_center_y = this.m.pos.y - ( this.m.size.y / 2 );
+
+                    let dest_center_x = this.pos.x - ( this.size.x / 2 );
+                    let dest_center_y = this.pos.y - ( this.size.y / 2 );
+
+                    let vec_x = a_center_x - dest_center_x;
+                    let vec_y = a_center_y - dest_center_y;
+
+                    if( vec_y * vec_y > vec_x * vec_x )
+                    {
+                        if( vec_y > 0 )
+                            this.collide_state = "yes";
+                        else
+                            this.collide_state = "no";
+                    } else {
+                        if( vec_x > 0 )
+                            this.collide_state = "maybe yes";
+                        else
+                            this.collide_state = "maybe no";
+                    }
+
+                    context.beginPath();
+                    context.moveTo(this.pos.x - 160, this.pos.y - 160);
+                    context.lineTo(this.pos.x + this.size.x + 160, this.pos.y + this.size.y + 160 );
+
+                    context.moveTo(this.pos.x + this.size.x + 160, this.pos.y - 160);
+                    context.lineTo(this.pos.x - 160, this.pos.y + this.size.y + 160 );
+
+                    context.stroke(); 
+                    context.strokeRect( this.pos.x - 60, this.pos.y - 60, this.size.x + 120, this.size.y + 120 );
+                    context.fillText( this.collide_state, canvas.width / 2 - ( this.collide_state.length * 4.0 ) * 2.0, 120 );
+                    this.state = "x: " + vec_x + ", y: " + vec_y;
+                    context.fillText( this.state, canvas.width / 2 - ( this.collide_state.length * 4.0 ) * 2.0, 150 );
+                };
+            };
+
+            let rects = new c_rect( mouse );
+
+            let loop_callback = (() => {
+                
+                context.clearRect( 0, 0, canvas.width, canvas.height );
+                context.fillStyle = "rgba( 25, 25, 25, 255 )";
+                context.fillRect( 0, 0, canvas.width, canvas.height );
+
+                rects.draw_rectangle( );
+                mouse.render_mouse( );
+
+                window.requestAnimationFrame(loop_callback);
+            });
+            window.requestAnimationFrame(loop_callback);
+        </script>
+    </body>
+</html>
+</html>
