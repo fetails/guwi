@@ -83,12 +83,12 @@
                 context.fillStyle = "#000";
                 context.fillRect( 0, 0, canvas.width, canvas.height );
                 
-                mouse.render();
                 for( var i = 0; i < shanpes.length; i++ )
                 {
                     shanpes[ i ].render();
                 }
 
+                mouse.render();
                 console.log( shanpes.length )
 
                 window.requestAnimationFrame( request_frame );
