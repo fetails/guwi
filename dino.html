@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="idk">
+    <title>r e m i c k s</title>
+
+    <!-- Bootstrap core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+
+    <!-- Favicons -->
+<meta name="theme-color" content="#563d7c">
+    <style>
+        body, html
+        {
+            height: 100%;
+            background: rgb(2,0,36);
+            background-repeat: no-repeat;
+            background-size:auto;
+            background-attachment: fixed;
+            background-position:auto;
+            background: linear-gradient(56deg, rgb(44, 112, 60) 0%, rgb(80, 49, 151) 27%, rgb(163, 53, 45) 100%);
+        }
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" href="#">remicks</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+</nav>
+<br /><br /><br /><br />
+<main role="main" class="container">
+  <div class="jumbotron">
+    <h3>r e m i c k s</h3>
+    <p>I D K</p>
+    <b>space to jump</b><br />
+    <canvas></canvas>
+    <script>
+        let canvas=document.querySelector("canvas"),context=canvas.getContext("2d"),frame_scroller_x=0,speed_modifier=.5,c_obstacles=class{constructor(){this.x=canvas.width+20,this.y=canvas.height-50,this.h=50,this.w=15}render(){context.fillStyle="rgba( 150, 20, 20, 255 )",context.fillRect(this.x,this.y,this.w,this.h)}},c_player=class{constructor(){this.w=15,this.h=15,this.x=40,this.y=0,this.controller(),this.on_ground=!1,this.did_jump=!1,this.gravity=0}controller(){document.onkeydown=(t=>{32==t.keyCode&&(this.did_jump=!0)})}did_collide_with_obstacle(t){return this.x+this.w>t.x&&this.x<t.x+t.w&&this.y+this.h>t.y&&this.y<t.y+t.h}render(t){context.fillStyle="rgba( 88, 172, 250, 255 )",context.fillRect(this.x,this.y,this.w,this.h),this.y+this.h>canvas.height&&(this.y=canvas.height-this.h,this.on_ground=!0),this.on_ground?(this.gravity=0,this.did_jump&&(this.gravity-=4,this.on_ground=!1,this.did_jump=!1)):this.gravity+=.1,this.y+=this.gravity}},obstacles=[];obstacles[0]=new c_obstacles;let player=new c_player,target=0,frame_loop=()=>{context.clearRect(0,0,canvas.width,canvas.height),context.fillStyle="rgba( 25, 25, 25, 255 )",context.fillRect(0,0,canvas.width,canvas.height),frame_scroller_x=speed_modifier+=9e-4;for(var t=0;t<obstacles.length;t++)obstacles[t].render(),obstacles[t].x+=-frame_scroller_x,target=obstacles[t],obstacles[t].x+obstacles[t].w<0&&(obstacles.shift(),obstacles.push(new c_obstacles));player.did_collide_with_obstacle(target)&&(frame_scroller_x=0,speed_modifier=.5,player.y=0,player.on_ground=!1,player.gravity=0),player.render(target),window.requestAnimationFrame(frame_loop)};window.requestAnimationFrame(frame_loop);
+    </script>
+    </div>
+</main>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+</html>
