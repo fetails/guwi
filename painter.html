@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>painter</title>
+    </head>
+    <body>
+        <style>
+            html, body
+            {
+                margin:0;
+                padding:0;
+                overflow:hidden;
+            }
+        </style>
+        <canvas style="border:1px solid rgb(0, 0, 0);"></canvas>
+        <script>
+            let canvas = document.querySelector("canvas"),
+            context = canvas.getContext("2d");
+            canvas.width = window.innerWidth, canvas.height = window.innerHeight;
+            let shapes = class {
+                constructor(x, y, w, h, color)
+                {
+                    this.x = x;
+                    this.y = y;
+                    this.w = w;
+                    this.h = h;
+                    this.color = color;
+                }
+
+                render()
+                {
+                    context.fillStyle = this.color;
+                    context.fillRect( this.x, this.y, this.w, this.h );
+                }
+            }
+
+            let shanpes = [];
+
+            let c_mouse = class 
+            {
+                constructor( )
+                {
+                    this.x = 0;
+                    this.y = 0;
+
+                    this.last_x = 0;
+                    this.last_y = 0;
+
+                    document.onmousemove = ( ( e ) => {
+                        this.x = e.clientX;
+                        this.y = e.clientY;
+                    });
+
+                    document.onmousedown = ( ( e ) => {
+                        if( e.buttons == 1 )
+                        {
+                            this.last_x = e.clientX;
+                            this.last_y = e.clientY;
+                            this.mouse_down = true;
+                        }
+                    });
+
+                    document.onmouseup = ( ( e ) => {
+                        let rand_col = "rgba( " + Math.floor( Math.random( ) * 256 ) + ", " + Math.floor( Math.random( ) * 256 ) + ", " + Math.floor( Math.random( ) * 256 ) + ", 255 )"; 
+                        shanpes.push( new shapes( this.last_x, this.last_y, this.x - this.last_x, this.y - this.last_y, rand_col ) );
+                        this.mouse_down = false;
+                    });
+                };
+                
+                render()
+                {
+                    if( this.mouse_down )
+                    {
+                        context.fillStyle = "#fff";
+                        context.fillRect( this.last_x, this.last_y, this.x - this.last_x, this.y - this.last_y );
+                    }
+                }
+            };
+
+            let mouse = new c_mouse();
+            let request_frame = () => {
+                context.clearRect(0, 0, canvas.width, canvas.height );
+                context.fillStyle = "#000";
+                context.fillRect( 0, 0, canvas.width, canvas.height );
+                
+                mouse.render();
+                for( var i = 0; i < shanpes.length; i++ )
+                {
+                    shanpes[ i ].render();
+                }
+
+                console.log( shanpes.length )
+
+                window.requestAnimationFrame( request_frame );
+            };
+
+            window.requestAnimationFrame( request_frame );
+        </script>
+    </body>
+</html>
