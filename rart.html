@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>hai</title>
+    </head>
+    <body>
+        <style>
+            body, html {
+                padding:0;
+                margin:0;
+                overflow:hidden;
+            }
+        </style>
+        <canvas></canvas>
+        <script>
+            let indexed = 0;
+            let late_update = 0;
+
+            let canvas = document.querySelector( "canvas" ),
+                context = canvas.getContext( "2d" );
+
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+
+                let c_mouse = class
+                {
+                    constructor()
+                    {
+                        this.x = 0;
+                        this.y = 0;
+                        this.angle = 0;
+                        
+                        document.onmousemove = ( e ) => {
+                            this.x = e.clientX;
+                            this.y = e.clientY;
+
+                            this.angle = Math.atan2( this.y - canvas.height / 2, this.x - canvas.width / 2 );
+                        };
+                    }
+                }
+                let mouse = new c_mouse( );
+                let c_ball = class
+                {
+                    constructor( )
+                    {
+                        this.x = canvas.width / 2;
+                        this.y = canvas.height / 2;
+                        this.rad = 5;
+                        this.framer = 1;
+                        this.index = 0;
+                        this.velocity = { x: 0, y: 0 };
+                    }
+
+                    update( )
+                    {
+                        this.velocity.x += 3.0;
+                        this.velocity.y += 4.0;
+                        this.x += Math.cos( this.velocity.x / Math.PI ) * 90;
+                        this.y += Math.sin( this.velocity.y / Math.PI ) * 70;
+                    }
+
+                    render( )
+                    {
+                        context.beginPath();
+                        context.arc(this.x, this.y, this.rad, 0, 2 * Math.PI);
+                        
+                        let r = 70 - this.index * 1.0;
+                        let g = 70 + this.index * 2.0;
+                        let b = 185 - this.index * 1.0;
+                        let a = 255 - this.index * 3.0;
+
+                        context.fillStyle = "rgba( " + r + ", " + g + ", " + b + ", " + a + ")";
+                        context.fill();
+                        
+                        this.update(  );
+                    }
+                }
+
+                let balls = [];
+                
+                let frame_loop = () => {
+                    window.requestAnimationFrame( frame_loop );
+                    context.clearRect( 0, 0, canvas.width, canvas.height );
+                    context.fillStyle = "rgba( 25, 25, 25, 255 )";
+                    context.fillRect( 0, 0, canvas.width, canvas.height );
+                    
+                    if( Date.now() > late_update )
+                    {
+                        late_update = Date.now( );
+                        balls.push( new c_ball( ) );
+                    }
+
+                    if( balls.length > 60 )
+                        balls.pop();
+
+                    for( var i = 0; i < balls.length; i++ )
+                    {
+                        balls[ i ].index = i;
+                        balls[ i ].render( );
+                    };
+                };
+
+                window.requestAnimationFrame( frame_loop );
+        </script>
+    </body>
+</html>
